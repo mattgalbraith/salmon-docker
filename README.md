@@ -22,7 +22,7 @@ docker build -t salmon .
 #### To test this tool from the command line:
 Mount and use your current directory and call the tool now encapsulated within the container
 ```bash
-docker run --rm -it -v $PWD:$PWD -w $PWD salmon salmon -h
+docker run --rm -it -v "$PWD":"$PWD" -w "$PWD" salmon salmon -h
 ```
 
 ## Optional: Conversion of Docker image to Singularity

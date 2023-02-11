@@ -1,7 +1,22 @@
-# This dockerfile is based on the one available at https://github.com/COMBINE-lab/salmon/blob/master/docker/Dockerfile
+################## BASE IMAGE ######################
 FROM ubuntu:18.04 as base
-MAINTAINER matthew.galbraith@cuanschutz.edu
 
+################## METADATA ######################
+LABEL base_image="ubuntu:18.04"
+LABEL version="2"
+LABEL software="Salmon"
+LABEL software.version="1.9.0"
+LABEL about.summary="Salmon is a tool for quantifying the expression of transcripts using RNA-seq data"
+LABEL about.home="https://combine-lab.github.io/salmon/"
+LABEL about.documentation="https://salmon.readthedocs.io/en/latest/"
+LABEL about.license_file="https://github.com/COMBINE-lab/salmon/blob/master/LICENSE"
+LABEL about.license="GNU General Public License v3.0"
+
+################## MAINTAINER ######################
+MAINTAINER Matthew Galbraith <matthew.galbraith@cuanschutz.edu>
+# This dockerfile is based on the one available at https://github.com/COMBINE-lab/salmon/blob/master/docker/Dockerfile
+
+################## INSTALLATION ######################
 ENV PACKAGES git gcc make g++ libboost-all-dev liblzma-dev libbz2-dev \
     ca-certificates zlib1g-dev libcurl4-openssl-dev curl unzip autoconf apt-transport-https ca-certificates gnupg software-properties-common wget
 ENV SALMON_VERSION 1.9.0
