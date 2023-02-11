@@ -1,5 +1,6 @@
+[![Docker Image CI](https://github.com/mattgalbraith/salmon-docker-singularity/actions/workflows/docker-image.yml/badge.svg)](https://github.com/mattgalbraith/salmon-docker-singularity/actions/workflows/docker-image.yml)
 # salmon-docker-singularity
-Build Docker container for salmon software and (optionally) convert to Apptainer/Singularity  
+## Build Docker container for salmon software and (optionally) convert to Apptainer/Singularity  
 Salmon is a tool for quantifying the expression of transcripts using RNA-seq data  
 Dockerfile modified from https://github.com/COMBINE-lab/salmon/blob/master/docker/Dockerfile
 
