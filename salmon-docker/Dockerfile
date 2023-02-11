@@ -1,8 +1,8 @@
 ################## BASE IMAGE ######################
-FROM ubuntu:22.04 as base
+FROM ubuntu:20.04 as base
 
 ################## METADATA ######################
-LABEL base_image="ubuntu:22.04"
+LABEL base_image="ubuntu:20.04"
 LABEL version="2"
 LABEL software="Salmon"
 LABEL software.version="1.9.0"
@@ -59,7 +59,7 @@ RUN curl -k -L https://github.com/COMBINE-lab/salmon/archive/v${SALMON_VERSION}.
 #    cd build && \
 #    cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local && make && make install
 
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 RUN apt-get update \
     && apt-get install -y --no-install-recommends libhwloc5 \
     && rm -rf /var/lib/apt/lists/*
