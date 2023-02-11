@@ -17,13 +17,13 @@ https://combine-lab.github.io/salmon/getting_started/
 ```bash
 WORKING_DIR=`pwd` # capture current working directory (should be the top-level salmon-docker-singularity directory)
 cd salmon-docker
-docker build -t salmon .
+docker build -t salmon:1.9.0 .
 ```
 
 #### To test this tool from the command line:
 Mount and use your current directory and call the tool now encapsulated within the container
 ```bash
-docker run --rm -it -v "$PWD":"$PWD" -w "$PWD" salmon salmon -h
+docker run --rm -it -v "$PWD":"$PWD" -w "$PWD" salmon:1.9.0 salmon -h
 ```
 
 ## Optional: Conversion of Docker image to Singularity
@@ -43,6 +43,7 @@ docker run --rm -it -v $PWD:$PWD -w $PWD singularity singularity
 ### 5. Save Docker image as tar and convert to sif (using singularity run from Docker container)
 ```bash
 cd $WORKING_DIR
+docker images
 docker save <Image_ID> -o salmon-docker.tar # = IMAGE_ID of salmon image
 docker run -v "$PWD:/out" --rm -it singularity bash -c "singularity build /out/salmon.sif docker-archive:///out/salmon-docker.tar"
 ```

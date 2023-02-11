@@ -1,8 +1,8 @@
 ################## BASE IMAGE ######################
-FROM ubuntu:20.04 as base
+FROM ubuntu:18.04 as base
 
 ################## METADATA ######################
-LABEL base_image="ubuntu:20.04"
+LABEL base_image="ubuntu:18.04"
 LABEL version="2"
 LABEL software="Salmon"
 LABEL software.version="1.9.0"
@@ -20,6 +20,7 @@ MAINTAINER Matthew Galbraith <matthew.galbraith@cuanschutz.edu>
 ENV PACKAGES git gcc make g++ libboost-all-dev liblzma-dev libbz2-dev \
     ca-certificates zlib1g-dev libcurl4-openssl-dev curl unzip autoconf apt-transport-https ca-certificates gnupg software-properties-common wget
 ENV SALMON_VERSION 1.9.0
+ENV DEBIAN_FRONTEND noninteractive
 
 # salmon binary will be installed in /home/salmon/bin/salmon
 
@@ -59,7 +60,8 @@ RUN curl -k -L https://github.com/COMBINE-lab/salmon/archive/v${SALMON_VERSION}.
 #    cd build && \
 #    cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local && make && make install
 
-FROM ubuntu:20.04
+FROM ubuntu:18.04
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
     && apt-get install -y --no-install-recommends libhwloc5 \
     && rm -rf /var/lib/apt/lists/*
