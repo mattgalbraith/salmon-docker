@@ -34,7 +34,7 @@ https://github.com/mattgalbraith/singularity-docker
 ``` bash
 docker images
 docker save <Image_ID> -o salmon-docker1.9.0.tar && gzip salmon-docker1.9.0.tar # = IMAGE_ID of salmon image
-docker run -v "$PWD:/data" --rm -it singularity bash -c "singularity build /data/salmon1.9.0.sif docker-archive:///data/salmon-docker1.9.0.tar.gz"
+docker run -v "$PWD:/data" --rm -it singularity1.1.5 bash -c "singularity build /data/salmon1.9.0.sif docker-archive:///data/salmon-docker1.9.0.tar.gz"
 ```
 NB: On Apple M1/M2 machines ensure Singularity image is built with x86_64 architecture or sif may get built with arm64  
 
