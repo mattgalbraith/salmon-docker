@@ -11,47 +11,36 @@ https://combine-lab.github.io/salmon/getting_started/
 
 ### 2. Build the Docker Image
 
-#### To build your image from the command line:
-* Can do this on [Google shell](https://shell.cloud.google.com) - docker is installed and available
-
-```bash
-WORKING_DIR=`pwd` # capture current working directory (should be the top-level salmon-docker-singularity directory)
-cd salmon-docker
+#### To build image from the command line:  
+``` bash
+# Assumes current working directory is the top-level salmon-docker-singularity directory
 docker build -t salmon:1.9.0 .
 ```
+* Can do this on [Google shell](https://shell.cloud.google.com)
 
 #### To test this tool from the command line:
-Mount and use your current directory and call the tool now encapsulated within the container
 ```bash
-docker run --rm -it -v "$PWD":"$PWD" -w "$PWD" salmon:1.9.0 salmon -h
+docker run --rm -it salmon:1.9.0 salmon -h
 ```
 
-## Optional: Conversion of Docker image to Singularity
+## Optional: Conversion of Docker image to Singularity  
 
-### 4. Build a Docker image to run Singularity
+### 3. Build a Docker image to run Singularity  
+(skip if this image is already on your system)  
+https://github.com/mattgalbraith/singularity-docker
 
-```bash
-cd $WORKING_DIR/singularity-docker
-docker build -t singularity .
-```
 
-#### Test singularity container
-```bash
-docker run --rm -it -v $PWD:$PWD -w $PWD singularity singularity
-```
-
-### 5. Save Docker image as tar and convert to sif (using singularity run from Docker container)
-```bash
-cd $WORKING_DIR
+### 4. Save Docker image as tar and convert to sif (using singularity run from Docker container)  
+``` bash
 docker images
-docker save <Image_ID> -o salmon-docker.tar # = IMAGE_ID of salmon image
-docker run -v "$PWD:/out" --rm -it singularity bash -c "singularity build /out/salmon.sif docker-archive:///out/salmon-docker.tar"
+docker save <Image_ID> -o salmon-docker1.9.0.tar && gzip salmon-docker1.9.0.tar # = IMAGE_ID of salmon image
+docker run -v "$PWD:/data" --rm -it singularity bash -c "singularity build /data/salmon1.9.0.sif docker-archive:///data/salmon-docker1.9.0.tar.gz"
 ```
-NB: may build with arm64 architecture if run on M1/M2 Macbook  
+NB: On Apple M1/M2 machines ensure Singularity image is built with x86_64 architecture or sif may get built with arm64  
 
 Next, transfer the salmon.sif file to the system on which you want to run Salmon from the Singularity container
 
-### 6. Test singularity container on (HPC) system with Singularity/Apptainer available
+### 5. Test singularity container on (HPC) system with Singularity/Apptainer available
 ```bash
 # set up path to the Salmon Singularity container
 SALMON_SIF=path/to/salmon.sif
